@@ -16,6 +16,9 @@ var plugins = [
 
 /* Minification */
 var htmlmin = require('gulp-htmlmin');
+var removeComments = require('gulp-remove-html-comments');
+
+var inject = require('gulp-inject');
 
 gulp.task('styles', function(){
   return gulp.src('index.scss')
@@ -29,10 +32,21 @@ gulp.task('styles-watch', ['styles'], function (done) {
     done();
 });
 
-gulp.task('html', function(){
+/* Our HTML Function Must Wait Until Styles Have Been
+ * Transpiled As It Injects These Styles Into Our Amp
+ * File
+*/
+gulp.task('html', ['styles'], function(){
   return gulp.src('index.amp.html')
+	.pipe(inject(gulp.src(['./dist/index.css']), {
+		starttag: '<!-- inject:head:css -->',
+		transform: function (filePath, file) {
+			return file.contents.toString('utf8')
+        }
+    }))
+    .pipe(removeComments())
     .pipe(htmlmin({
-      collapseWhitespace: true
+        collapseWhitespace: true
     }))
     .pipe(gulp.dest('dist/'))
 });
@@ -41,6 +55,7 @@ gulp.task('html-watch', ['html'], function (done) {
     browserSync.reload();
     done();
 });
+
 
 /* Basic Serving Using Browsersync */
 gulp.task('default', ['styles', 'html'], function () {
