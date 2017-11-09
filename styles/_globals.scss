@@ -1,8 +1,30 @@
+/* Scaling Factor of 1.333 */
+
 .globals {
     &__section-heading {
         margin: 0;
         padding: 0;
-        font-size: 2.5rem;
+        font-size: 2.369rem;
+
+        &--centered {
+            text-align: center;
+        }
+    }
+
+    &__section-blurb {
+        margin: 0;
+        padding: 0;
+        font-size: 1.333rem;
+
+        &--centered {
+            text-align: center;
+        }
+    }
+
+    &__paragraph {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
 
         &--centered {
             text-align: center;
