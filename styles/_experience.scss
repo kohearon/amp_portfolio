@@ -8,6 +8,10 @@
     &__item-container {
         grid-column-end: span 5;
 
+        &--right {
+            grid-column-start: 7;
+        }
+
     }
 
     &__timelime-line {
@@ -20,8 +24,8 @@
 
     &__timeline-icon-container {
         border-radius: 50%;
-        width: 70%;
-        height: 25%;
+        width: 55px; 
+        height: 70px;
         background-color: $blue;
         display: flex;
         align-items: center;
@@ -32,7 +36,22 @@
     &__timeline-vertical-line {
         height: 100%;
         margin: 0;
-        color: $blue;
+        background-color: $very-light-grey;
+        border: 0;
+        width: 3px;
+    }
+
+    &__timeline-filler {
+        grid-column-end: span 6;
+
+        &--right {
+            grid-column-start: 7;
+        }
+
+        &--left {
+            grid-column-end: span 5;
+            grid-column-start: 1;
+        }
     }
 
 }
