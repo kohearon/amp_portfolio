@@ -46,8 +46,8 @@ gulp.task('html-watch', ['html'], function (done) {
 gulp.task('default', ['styles', 'html'], function () {
     browserSync.init({
         server: {
-            baseDir: "dist/",
-            index: 'index.html.amp'
+            baseDir: "dist",
+            index: "index.amp.html"
         }
     });
 
