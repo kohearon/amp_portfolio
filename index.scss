@@ -1,1 +1,12 @@
+@import 'styles/variables';
+@import 'styles/globals';
 @import 'styles/header';
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-content {
+    max-width: 75vw;
+    margin: 0 auto;
+}

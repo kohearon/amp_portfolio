@@ -1,0 +1,11 @@
+.globals {
+    &__section-heading {
+        margin: 0;
+        padding: 0;
+        font-size: 2.5rem;
+
+        &--centered {
+            text-align: center;
+        }
+    }
+}
