@@ -1,5 +1,42 @@
 .header {
-    &__image {
-        border: 2px solid red;
+    position: relative;
+
+    &__background-shape {
+        background-color: #13A2DB;
+        min-height: 25vw;
+        transform: skewY(5deg);
+        transform-origin: 100%;
+    }
+
+    &__content-container{
+        position: absolute; 
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+    }
+
+    &__left-container {
+        flex: 1 1 auto;
+    }
+
+    &__right-container {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__nav-item {
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+        padding: 0 5px;
+
+        &:hover {
+            color: blue;
+        }
+        &--homepage {
+            color: white;
+        }
     }
 }
