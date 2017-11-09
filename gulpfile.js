@@ -57,8 +57,19 @@ gulp.task('html-watch', ['html'], function (done) {
 });
 
 
+gulp.task('images', function() {
+    return gulp.src('assets/images/*.jpg')
+        .pipe(gulp.dest('dist/assets/images/'))
+});
+
+gulp.task('images-watch', ['images'], function (done) {
+    browserSync.reload();
+    done();
+});
+
+
 /* Basic Serving Using Browsersync */
-gulp.task('default', ['styles', 'html'], function () {
+gulp.task('default', ['styles', 'html', 'images'], function () {
     browserSync.init({
         server: {
             baseDir: "dist",
@@ -66,6 +77,8 @@ gulp.task('default', ['styles', 'html'], function () {
         }
     });
 
-	gulp.watch(['./styles/*.scss', 'index.scss'], ['styles']);
-	gulp.watch('index.amp.html', ['html']);
+    /* When Styles Change We Have To Inject Again */
+	gulp.watch(['./styles/*.scss', 'index.scss'], ['html-watch']);
+	gulp.watch('index.amp.html', ['html-watch']);
+	gulp.watch('assets/images*.jpg', ['images']);
 });
