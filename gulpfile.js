@@ -1,5 +1,9 @@
 var gulp = require('gulp');
 
+/* Browsersync Stuff */
+var browserSync = require('browser-sync').create();
+var reload      = browserSync.reload;
+
 /* Styles */
 var sass = require('gulp-sass');
 var postcss = require('gulp-postcss');
@@ -10,6 +14,8 @@ var plugins = [
      cssnano()
  ];
 
+/* Minification */
+var htmlmin = require('gulp-htmlmin');
 
 gulp.task('styles', function(){
   return gulp.src('index.scss')
@@ -18,9 +24,33 @@ gulp.task('styles', function(){
     .pipe(gulp.dest('dist/'))
 });
 
-/* Watch Task For All Others */
-gulp.task('watch', function(){
-  gulp.watch(['./styles/*.scss', 'index.scss'], ['styles']);
+gulp.task('styles-watch', ['styles'], function (done) {
+    browserSync.reload();
+    done();
 });
 
-gulp.task('default', ['styles'], function(){});
+gulp.task('html', function(){
+  return gulp.src('index.amp.html')
+    .pipe(htmlmin({
+      collapseWhitespace: true
+    }))
+    .pipe(gulp.dest('dist/'))
+});
+
+gulp.task('html-watch', ['html'], function (done) {
+    browserSync.reload();
+    done();
+});
+
+/* Basic Serving Using Browsersync */
+gulp.task('default', ['styles', 'html'], function () {
+    browserSync.init({
+        server: {
+            baseDir: "dist/",
+            index: 'index.html.amp'
+        }
+    });
+
+	gulp.watch(['./styles/*.scss', 'index.scss'], ['styles']);
+	gulp.watch('index.amp.html', ['html']);
+});
