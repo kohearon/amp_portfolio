@@ -1,27 +1,26 @@
 .experience {
     &__timeline-grid {
         display: grid;
-        grid-template-columns: repeat(7, 80px);
+        grid-template-columns: repeat(5, 1fr);
         grid-column-gap: 20px;
         justify-content: center;
     }
 
     &__item-container {
-        grid-column-end: span 3;
         padding-bottom: 3.123rem;
+        grid-column-end: span 2;
 
         &--left {
             grid-column-start: 1;
         }
 
         &--right {
-            grid-column-start: 5 ;
+            grid-column-start: 4;
         }
 
     }
 
-    &__timelime-line {
-        grid-column-end: span 1;
+    &__timeline-line {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -48,15 +47,8 @@
     }
 
     &__timeline-filler {
-        grid-column-end: span 3;
-
-        &--left {
-            grid-column-start: 1;
-        }
-
-        &--right {
-            grid-column-start: 5;
-        }
+        grid-column-end: span 2;
+        grid-column-start: 1;
     }
 
     &__job-title {
@@ -79,5 +71,26 @@
         opacity: 0;
         display: none;
     }
+}
 
+@media screen and (max-width: 768px) {
+
+    .experience {
+        &__timeline-grid {
+            text-align: center;
+        }
+
+        &__item-container {
+            grid-column-end: span 5;
+
+            &--right {
+                grid-column-start: 1;
+            }
+        }
+
+        &__timeline-line {
+            grid-column-start: 2;
+            grid-column-end: span 3;
+        }
+    }
 }
